@@ -1,0 +1,11 @@
+Uuid: d405150b57e54887b1dcfa563b7c0b6f
+ExtensionType: 1
+Name: HeartBleed
+ScreenVersion: 1.0
+SerialVersion: 1
+MinPlatformVersion: 0
+ProOnly: False
+Author:  Ashkan Jahanbakhsh
+ShortDescription: Checks whether a server is vulnerable to the Heartbleed bug.
+EntryPoint: build/libs/heartbleed-all.jar
+BuildCommand: gradle -PburpJar=$BURP_JAR fatJar
