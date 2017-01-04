@@ -84,12 +84,12 @@ public class HeartBleed implements IMenuItemHandler, ITab, ActionListener {
 		final int port = portNumber;
 		final String starttls = s.getText();
 		try {
-			if (arg1[0].getHost() != null) {
+			if (arg1[0].getHttpService().getHost() != null) {
 
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						prepareSslTest("[*] Testing " + arg1[0].getHost() + ":" + port +  " against heartbleed bug.", arg1[0].getHost(), port, starttls);
+						prepareSslTest("[*] Testing " + arg1[0].getHttpService().getHost() + ":" + port +  " against heartbleed bug.", arg1[0].getHttpService().getHost(), port, starttls);
 					}
 				});
 			}
