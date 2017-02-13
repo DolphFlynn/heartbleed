@@ -1,6 +1,7 @@
 Uuid: d405150b57e54887b1dcfa563b7c0b6f
 ExtensionType: 1
 Name: HeartBleed
+RepoName: heartbleed
 ScreenVersion: 1.0
 SerialVersion: 1
 MinPlatformVersion: 0
