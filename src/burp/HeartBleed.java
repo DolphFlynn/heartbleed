@@ -3,8 +3,6 @@ package burp;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.StringWriter;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
@@ -33,7 +31,7 @@ import org.python.util.PythonInterpreter;
  *
  */
 
-public class HeartBleed implements IMenuItemHandler, ITab, ActionListener {
+public class HeartBleed implements ITab {
 	@SuppressWarnings("unused")
 	private IBurpExtenderCallbacks callbacks;
 	private JPanel main; 
@@ -57,8 +55,7 @@ public class HeartBleed implements IMenuItemHandler, ITab, ActionListener {
 		callbacks.addSuiteTab(HeartBleed.this);
 	}
 
-	@Override
-	public void menuItemClicked(String arg0, final IHttpRequestResponse[] arg1) {
+	public void menuItemClicked(final IHttpRequestResponse[] requestResponses) {
 		JTextField p = new JTextField();
 		p.setText(DEFAULT_PORT + "");
 		JTextField s = new JTextField();
@@ -84,12 +81,12 @@ public class HeartBleed implements IMenuItemHandler, ITab, ActionListener {
 		final int port = portNumber;
 		final String starttls = s.getText();
 		try {
-			if (arg1[0].getHttpService().getHost() != null) {
+			if (requestResponses[0].getHttpService().getHost() != null) {
 
 				SwingUtilities.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						prepareSslTest("[*] Testing " + arg1[0].getHttpService().getHost() + ":" + port +  " against heartbleed bug.", arg1[0].getHttpService().getHost(), port, starttls);
+						prepareSslTest("[*] Testing " + requestResponses[0].getHttpService().getHost() + ":" + port +  " against heartbleed bug.", requestResponses[0].getHttpService().getHost(), port, starttls);
 					}
 				});
 			}
@@ -149,10 +146,6 @@ public class HeartBleed implements IMenuItemHandler, ITab, ActionListener {
 		String name = tPane.getTitleAt(index);
 		tabs.removeItem(name);
 		tPane.remove(index);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
 	}
 
 	/**
