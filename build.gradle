@@ -1,12 +1,17 @@
-apply plugin: 'java'
+plugins {
+    id 'java-library'
+}
 
 repositories {
     mavenCentral()
 }
 
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
 dependencies {
-    compile 'net.portswigger.burp.extender:burp-extender-api:1.7.13'
-    compile 'org.python:jython:2.7.1b3'
+    compileOnly('net.portswigger.burp.extender:burp-extender-api:1.7.13')
+    implementation('org.python:jython:2.7.1b3')
 }
 
 sourceSets {
@@ -17,8 +22,9 @@ sourceSets {
     }
 }
 
-task fatJar(type: Jar) {
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+jar {
+    archiveBaseName = project.name + '-all'
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

@@ -9,4 +9,4 @@ ProOnly: False
 Author:  Ashkan Jahanbakhsh
 ShortDescription: Checks whether a server is vulnerable to the Heartbleed bug.
 EntryPoint: build/libs/heartbleed-all.jar
-BuildCommand: gradle fatJar
+BuildCommand: gradle jar
